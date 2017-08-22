@@ -49,10 +49,14 @@ if all the tasks throught the week can be done (a valid assignment). This is don
 
 Suppose we have N bros that do midnights and M tasks this week. We represent each bro and task as a vertex. We also add a source and a target vertex. We connect each of the bro vertices to the source vertex with an edge of capacity infinity. We also connect each task vertex to the target vertex with an edge of capacity 1.
 
-<img src="graph_img1.png" width="1000" align = 'center'>
+<img src="graph_img1.png" width="800" align = 'center'>
 
 
 ### Encoding Specification Constraints
+
+W3 also add an edge between every brother and every task. If brother $b_i$ wants to do task $t_j$, then the edge $(b_i, t_j)$ will have capacity $1$. Otherwise, this edge will have capacity $0$.
+
+
 
 ### Encoding Bucketing Constraints
 
