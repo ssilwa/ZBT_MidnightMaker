@@ -8,7 +8,7 @@
 
 
 # Python:
-````Python
+```Python
 while True:
     print('Hello')
 ```
