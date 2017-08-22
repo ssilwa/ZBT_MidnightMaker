@@ -49,7 +49,7 @@ if all the tasks throught the week can be done (a valid assignment). This is don
 
 Suppose we have N bros that do midnights and M tasks this week. We represent each bro and task as a vertex. We also add a source and a target vertex. We connect each of the bro vertices to the source vertex with an edge of capacity infinity. We also connect each task vertex to the target vertex with an edge of capacity 1.
 
-![Alt text](graph_img1.png?raw=true "Graph1"| width=100)
+![graph1](graph_img1.png?raw=true "Graph1"|width=100)
 
 
 
