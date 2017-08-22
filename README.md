@@ -49,7 +49,7 @@ if all the midniths throught the week can be done (a valid assignment). This is 
 
 Suppose we have N bros that do midnights and M midnights this week. The M midnights are actually tuples of the form (chore, day) where chores is bathrooms, kitchens, etc and day is Sunday through Friday. We represent each bro and midnight as a vertex. We also add a source and a target vertex. We connect each of the bro vertices to the source vertex with an edge of capacity infinity. We also connect each midnight vertex to the target vertex with an edge of capacity 1.
 
-<img src="graph_img1.png" width="800" align = 'center'>
+<img src="graph_img1.png" width="500" align = 'center'>
 
 
 ### Encoding Specification Constraints
