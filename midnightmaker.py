@@ -2,7 +2,7 @@ from graphMaker import *
 from helper import *
 from constants import *
 import datetime
-import numpy as np
+from collections import Counter
 import time
 
 ''' Main function for assigning midnights
@@ -39,7 +39,12 @@ def main():
 
 	# Turn max flow into assignments
 	curr_assignments = residual_to_midnights(Residiual, bros)
-	#unique, counts = np.unique(list(curr_assignments.values()), return_counts=True)
+
+	# Frequency counts:
+	frequency = curr_assignments.values()
+	counts = Counter(frequency)
+	print(counts)
+	# print(curr_assignments)
 
 	# TODO Put assignments in website
 
