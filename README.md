@@ -1,6 +1,6 @@
 ## Introduction
 
-This is the updated midnight maker script for ZBT Fraternity at MIT.
+This is the updated midnight maker script for ZBT Fraternity at MIT. 
 
 
 ## Installation
@@ -9,8 +9,7 @@ See the directions here: https://help.github.com/articles/cloning-a-repository/
 
 ## How to Use
 
-CD into the directory you created from the step above. Go to a terminal and 
-type 
+CD into the directory you created from the step above. Make sure you have Python3 installed in your machine. Go to a terminal and type 
 
 ```python
 python3 midnightmaker.py
@@ -18,6 +17,7 @@ python3 midnightmaker.py
 
 This will automatically pull the current data about preferences and points
 and output this week's assignments (once we have the website running)
+If there are any errors, make sure you have all the packages from the requirements.txt file installed. All of them should be installable using pip3. 
 
 ## Quick Overview of the Algorithm
 
