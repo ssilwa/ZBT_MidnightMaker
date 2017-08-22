@@ -49,18 +49,25 @@ if all the midniths throught the week can be done (a valid assignment). This is 
 
 Suppose we have N bros that do midnights and M midnights this week. The M midnights are actually tuples of the form (chore, day) where chores is bathrooms, kitchens, etc and day is Sunday through Friday. We represent each bro and midnight as a vertex. We also add a source and a target vertex. We connect each of the bro vertices to the source vertex with an edge of capacity infinity. We also connect each midnight vertex to the target vertex with an edge of capacity 1.
 
-<img src="graph_img1.png" width="500" align = 'middle'>
+<p align="center">
+<img src="graph_img1.png" width="600">
+</p>
+
 
 
 ### Encoding Specification Constraints
 
 We also add an edge between every brother and every midnight. If brother b_i wants to do tmidnight m_j (based on both the chore and day), then the edge (b_i, m_j) will have capacity 1. Otherwise, this edge will have capacity 0. 
 
-<img src="graph_img2.png" width="500" align = 'middle'>
+<p align="center">
+<img src="graph_img2.png" width="600">
+</p>
 
 ### Encoding Bucketing Constraints
 
-<img src="graph_img3.png" width="500" align = 'middle'>
+<p align="center">
+<img src="graph_img3.png" width="600">
+</p>
 
 ### Max Flow 
 
