@@ -2,7 +2,6 @@
 ### Features:
 
 ### Installation
-.
 
 > **Note:** just a note
 
