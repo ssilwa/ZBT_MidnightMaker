@@ -41,8 +41,7 @@ and similarly, quartile 4 bros should be doing most of the midnights. Currently,
 ### Matching 
 
 Given the specification and bucketing constraints above, we try to determine if 
-if all the midniths throught the week can be done (a valid assignment). This is done by creating a graph that encodes the constraints above and reformulating the problem as a maximum flow problem. (Details about this in the section below.) If an assignemnt is possible, we are done. Otherwise, we take away the specification constraints of the quartile 4 brothers and try agian. If we are done, great; otherwise, we take away the specifications of the quartile 3 brothers and try again etc. If there are no specifications of all the brothers, we are guarenteed to find a vlaid assignment (see section below). Therefore, this algorithm must terminate.
-
+if all the midniths throught the week can be done (a valid assignment). This is done by creating a graph that encodes the constraints above and reformulating the problem as a maximum flow problem. (Details about this in the section below.) If an assignemnt is possible, we are done. Otherwise, we take away the specification constraints of the quartile 4 brothers and try agian. If we are done, great; otherwise, we take away the specifications of the quartile 3 brothers and try again etc. If there are no specifications for all the brothers, we are guarenteed to find a valid assignment (see section below). 
 ## Detailed Overview of the Algorithm
 
 ### Graph construction
@@ -72,6 +71,8 @@ To deal with the bucketing constraints as described above, we need to add a cons
 </p>
 
 ### Max Flow 
+
+We then run a max flow algorithm in the graph created above from the source vertex to the target vertex. The algorithm used is Edmonds-Karp. The flow in the residual graph gives us our midnight assignments. If all of the edges between bros and tasks have weight 1, it is easy to see that the min cut is between the task vertices and the target vertex. Therefore, the program above is guarenteed to find an assignment (some bros might lose their specification constraints and described above).
 
 
 
