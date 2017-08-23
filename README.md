@@ -11,7 +11,7 @@ See the directions here: https://help.github.com/articles/cloning-a-repository/
 
 CD into the directory you created from the step above. Make sure you have Python3 installed in your machine. Open a terminal and type 
 
-```python
+```bash
 python3 midnightmaker.py
 ```
 
