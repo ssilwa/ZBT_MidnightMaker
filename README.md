@@ -65,11 +65,15 @@ We also add an edge between every brother and every midnight. If brother b_i wan
 
 ### Encoding Bucketing Constraints
 
+To deal with the bucketing constraints as described above, we need to add a constraint for each bro vertex. For each of the four quartiles, we fairly distribute the number of tamidnights assigned to that quartile among each of the bros in that quatile (some bros might have one more midnights assigned than others in the same quartile due to rounding). To encode this into our graph, we replace each bro vertex (say b_i) with two vertices (b_i and b_i') and add an edge between them. We let the capacity of that edge be c_i, the number of midnights assigned to that bro. Intuitively, this number represents the maximum number of midnights bro b_i is allowed to do this week. Due to how we allocate the total number of midnights among quartiles, bros in quartile 1 will have a lower maximum than bros in quartile 4.
+
 <p align="center">
 <img src="Images\graph_img3.png" width="600">
 </p>
 
 ### Max Flow 
+
+
 
 
 
