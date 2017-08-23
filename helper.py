@@ -10,7 +10,7 @@ import pandas as pd
 Output format: [(bro1, points1), (bro2, points2), ...]
 '''
 def get_current_points():
-	currpoints = pd.read_excel('test_points.xlsx')
+	currpoints = pd.read_excel('testdata/test_points.xlsx')
 	return list(zip(currpoints.Brother, currpoints.Points))
 
 ''' Get days and task preferences for every bro.
@@ -18,7 +18,7 @@ Day preference output format: {bro1: {'Monday': 0, 'Tuesday': 1, etc}, etc}
 Task preference output format: {bro1: {'Kitchens': 1, 'Bathrooms': 0, etc}, etc}
 '''
 def get_current_preferences(tasks = task_labels):
-	currprefs = pd.read_excel('test_preferences.xlsx')
+	currprefs = pd.read_excel('testdata/test_preferences.xlsx')
 	days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 	prefs_days = currprefs[['Brother'] + days]
 	prefs_days.index = prefs_days['Brother']
@@ -80,7 +80,6 @@ def make_bro_capacity():
 		except:
 			pass
 	return (quartile_1_bros, quartile_2_bros, quartile_3_bros, quartile_4_bros, capacity)
-
 
 ''' Return dictionary with:
 key: (bro, task)
