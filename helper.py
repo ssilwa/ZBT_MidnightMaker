@@ -2,6 +2,7 @@ from constants import *
 import numpy as np
 import random
 import pandas as pd
+from datetime import datetime, timedelta
 
 ''' Helper script for midnightmaker.py
 '''
@@ -9,8 +10,9 @@ import pandas as pd
 ''' Get current points for every bro
 Output format: [(bro1, points1), (bro2, points2), ...]
 '''
-def get_current_points():
-	currpoints = pd.read_excel('testdata/test_points.xlsx')
+def get_current_points(exempt = exempt_bros):
+	currpoints = pd.read_excel('realdata/realpoints.xlsx')
+	currpoints = currpoints[currpoints.Brother.apply(lambda x: x not in exempt_bros)]
 	return list(zip(currpoints.Brother, currpoints.Points))
 
 ''' Get days and task preferences for every bro.
@@ -18,8 +20,8 @@ Day preference output format: {bro1: {'Monday': 0, 'Tuesday': 1, etc}, etc}
 Task preference output format: {bro1: {'Kitchens': 1, 'Bathrooms': 0, etc}, etc}
 '''
 def get_current_preferences(tasks = task_labels):
-	currprefs = pd.read_excel('testdata/test_preferences.xlsx')
-	days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+	currprefs = pd.read_excel('realdata/realpreferences.xlsx')
+	days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Saturday']
 	prefs_days = currprefs[['Brother'] + days]
 	prefs_days.index = prefs_days['Brother']
 	prefs_days = prefs_days[days]
@@ -45,6 +47,7 @@ def allocate_tasks(num_tasks, bros):
 			curr_index += 1
 			diff -= 1
 		return capacity
+
 	except:
 		return None
 
@@ -69,6 +72,12 @@ def make_bro_capacity():
 	quartile_2_bros = [bro[0] for bro in bro_points if top25 > bro[1] >= top50]
 	quartile_3_bros = [bro[0] for bro in bro_points if top50 > bro[1] >= top75]
 	quartile_4_bros = [bro[0] for bro in bro_points if bro[1] < top75]
+	if len(quartile_4_bros) == 0:
+		to_take = len(quartile_3_bros)//2
+		quartile_4_bros = quartile_3_bros[:to_take]
+		quartile_3_bros = quartile_3_bros[to_take:]
+
+	# Check for zero length quartiles!
 
 	# Get capacity of bros based on percentiles
 	capacity = {}
@@ -101,3 +110,21 @@ def make_task_capacity(all_tasks = all_tasks, days_map = days_map):
 			else:
 				task_capacity[(bro, task)] = 0.0
 	return task_capacity
+
+''' Function to get the actual date of the next Monday or Sunday etc '''
+def get_next_weekday(weekday, startdate = datetime.now()):
+	# We want to run on this on Sundays!
+	if startdate.weekday() == 5:
+		startdate = startdate + timedelta(1)
+		
+	"""
+	@startdate: given date, in format '2013-05-25'
+	@weekday: week day as a string
+	"""
+
+	# This weekday_map is only for this function!
+	weekday_map = {'Monday': 0, 'Tuesday': 1, 'Wednesday': 2, 'Thursday': 3, 'Friday': 4, 'Saturday': 5, 'Sunday': 6}
+	weekday = weekday_map[weekday]
+	t = timedelta((7 + weekday - startdate.weekday()) % 7)
+	return (startdate + t).strftime('%Y-%m-%d')
+
