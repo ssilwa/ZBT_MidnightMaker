@@ -3,12 +3,13 @@ from networkx.algorithms.flow import edmonds_karp
 import matplotlib.pyplot as plt
 from constants import *
 import pandas as pd
+from helper import *
 
 ''' Creates the graph that we will run max flow on 
 '''
 def create_graph(bros, tasks, brocapacity, preferences):
 	# Initialize Graph
-	G = nx.Graph()
+	G = nx.DiGraph()
 
 	# Add source and sink nodes
 	G.add_node('source')
@@ -47,22 +48,31 @@ def create_graph(bros, tasks, brocapacity, preferences):
 using Edmonds-Karp algorithm
 '''
 def run_flow(graph, source = 'source', sink = 'sink'):
-	R = edmonds_karp(graph, source, sink)
+	R = edmonds_karp(graph, source, sink, capacity = 'capacity')
 	return R
 
 ''' Turn residual graph into actual midnight assignments '''
-def residual_to_midnights(R, bros, tasks = all_tasks, days_map = days_map):
+def residual_to_midnights(R, bros, tasks = all_tasks, days_map = days_map, heavy_bathrooms = heavy_bathrooms):
 	flow = list(R.edges_iter(data='flow'))
 	bros = set(bros)
 	tasks = set(tasks)
-	midnights = {}
+	midnights = []
 	for edge in flow:
-		curr_dict = {}
 		v1 = edge[0]
 		v2 = edge[1]
 		value = edge[2]
-		if v1[:-2] in bros and v2 in tasks and value > 0:
+		if (v1[:-2] in bros) and (v2 in tasks) and (value == 1.0):
+			curr_dict = {}
 			curr_task = v2[:-1]
+			if curr_task[-1] == '1' or curr_task[-1] == '2':
+				curr_task = curr_task[:-1]		
+
+			# Check if bathrooms is a heavy bathrooms day, if so, change the name to 'Heavy Bathrooms'
+			if curr_task == 'Bathrooms' and int(v2[-1]) in heavy_bathrooms:
+				curr_task = 'Heavy Bathrooms'
+
 			curr_day = days_map[v2[-1]]
-			midnights[(curr_task, curr_day)] = v1[:-2]
+			curr_day = get_next_weekday(curr_day)
+			curr_dict = {'zebe': v1[:-2], 'date': curr_day, 'task': curr_task}
+			midnights.append(curr_dict)
 	return midnights

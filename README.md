@@ -9,15 +9,21 @@ See the directions here: https://help.github.com/articles/cloning-a-repository/
 
 ## How to Use
 
-CD into the directory you created from the step above. Make sure you have Python3 installed in your machine. Open a terminal and type 
+First make sure the following are upto date.
+
+1) The points spread sheet
+2) The preference spread sheet
+3) List of exempt bros (can be found in constants.py)
+
+Then, CD into the directory you created from the step above. Make sure you have Python3 installed in your machine. Open a terminal and type 
 
 ```bash
 python3 midnightmaker.py
 ```
 
 This will automatically pull the current data about preferences and points
-and output this week's assignments (once we have the website running).
-If there are any errors, make sure you have all the packages from the requirements.txt file installed. All of them should be installable using pip3. 
+and output this week's assignments to ZBTodo.
+If there are any errors, make sure you have all the packages from the requirements.txt file installed. All of them can be installable using pip3. 
 
 ## Quick Overview of the Algorithm
 
